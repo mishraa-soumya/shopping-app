@@ -7,6 +7,7 @@
   "devDependencies": {
     "@babel/core": "^7.3.3",
     "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.5",
     "babel-preset-react-app": "^7.0.1",
     "webpack": "^4.29.4",
@@ -30,19 +31,13 @@
   },
   "babel": {
     "presets": [
-      "@babel/preset-env"
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   },
-  // "scripts": {
-  //   "dev:build-server": "SET NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
-  //   "dev:start": "nodemon ./server/index.js",
-  //   "dev": "npm-run-all --parallel dev:*"
-  // }
   "scripts": {
-    "client": "cd client && yarn start",
-    "server": "nodemon server/index.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "dev:server": "cd client && yarn build && cd .. && yarn start",
-    "start": "node server/index.js"
+    "dev:build-server": "SET NODE_ENV=development webpack --config webpack.server.js --mode=development -w",
+    "dev:start": "nodemon ./server/index.js",
+    "dev": "npm-run-all --parallel dev:*"
   }
 }
