@@ -3,16 +3,6 @@ class App extends Component {
   
   handleSubmit() {
     e.preventDefault();
-    // const response = await fetch('/api/world', {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    //   body: JSON.stringify({ post: this.state.post }),
-    // });
-    // const body = await response.text();
-
-    // this.setState({ responseToPost: body });
   };
 
   render() {
