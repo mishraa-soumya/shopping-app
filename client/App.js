@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 class App extends Component {
   
-  handleSubmit() {
-    e.preventDefault();
-  };
-
   render() {
     return (
       <div className="App">
