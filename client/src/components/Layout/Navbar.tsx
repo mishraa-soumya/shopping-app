@@ -1,6 +1,6 @@
 import React from 'react';
-import {TabType, TabItem} from '../common';
-import Tab from '../Tabs/Tab';
+import {TabType, TabItem} from '../../common/common';
+import Tab from '../Tab/Tab';
 
 export interface NavbarProps {
     tabs: TabType[];

@@ -2,7 +2,7 @@ import React from 'react';
 import '../../assets/styles/App.css';
 
 export interface HeaderProps {
-    cartCount?: number;
+    cartCount?: number | null;
 }
 
 const Header = ({cartCount}: HeaderProps) => (
