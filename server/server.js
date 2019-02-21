@@ -1,87 +1,101 @@
-// const mongoose = require("mongoose");
-const express = require("express");
+const express = require("express"),
+    http = require('http'),
+    httpServer = http.Server(app),
+    request = require('request'),
+    fs = require('fs'),
+    cheerio = require('cheerio');
 const bodyParser = require("body-parser");
-// const logger = require("morgan");
-// const Data = require("./data");
+const path = require("path");
+const {fictionBookData, biographyBooksData, sciFiBooksData} = require('./static/files/listData');
+const tabData = require('./static/files/tabData');
 
 const API_PORT = 3001;
 const app = express();
-const router = express.Router();
-
-// this is our MongoDB database
-// const dbRoute = "mongodb://jelo:a9bc839993@ds151382.mlab.com:51382/jelotest";
-
-// connects our back end code with the database
-// mongoose.connect(
-// dbRoute,
-// { useNewUrlParser: true }
-// );
-
-// let db = mongoose.connection;
-
-// db.once("open", () => console.log("connected to the database"));
-
-// checks if connection with the database is successful
-// db.on("error", console.error.bind(console, "MongoDB connection error:"));
-
+app.use('/Images', express.static(path.join(__dirname, '/static/projectImages/')));
 // (optional) only made for logging and
 // bodyParser, parses the request body to be a readable json format
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-// app.use(logger("dev"));
 
-// this is our get method
-// this method fetches all available data in our database
-router.get("/getData", (req, res) => {
-//   Data.find((err, data) => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true, data: data });
-//   });
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
 });
 
-// this is our update method
-// this method overwrites existing data in our database
-router.post("/updateData", (req, res) => {
-//   const { id, update } = req.body;
-//   Data.findOneAndUpdate(id, update, err => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
+app.get('/rum', async (req, res) => {
+    var fi = fs.readFile(__dirname + '/index.html','utf8', async (err, data) =>{
+    console.log(err)
+  
+    const $ = cheerio.load(data);
+    console.log('loaded')
+    const script = await getScript();
+    console.log('got script')
+    var scriptWithtag =`<script type="text/javascript">${script} </script>`.toString();
+    $('head').prepend(scriptWithtag);
+    console.log($('head script').length)
+    const updated = $.html();
+  
+    res.writeHeader(200, {"Content-Type": "text/html"});
+    res.write(updated);
+    res.end();
+    })
 });
 
-// this is our delete method
-// this method removes existing data in our database
-router.delete("/deleteData", (req, res) => {
-//   const { id } = req.body;
-//   Data.findOneAndDelete(id, err => {
-//     if (err) return res.send(err);
-//     return res.json({ success: true });
-//   });
+async function getScript() {
+    return new Promise((resolve, reject) =>{
+    request('http://localhost:3357/jp/557/v3.2.1/InitialLoadScript.js', (err, res, body) => {
+        if (err) {
+            console.log('error')
+            reject(err);
+            return;
+        }
+        resolve(res.body);
+    });
+    })
+}
+
+/**
+ * @description: To get data for tabs on list page
+ */
+app.get('/api/getTabData', (req, res, next) => {
+    if (tabData) {
+        return res.json({ responseData: tabData });
+    }
+    else
+    {
+        return res.json({ responseData: null });
+    }
 });
 
-// this is our create methid
-// this method adds new data in our database
-router.post("/putData", (req, res) => {
-//   let data = new Data();
-
-//   const { id, message } = req.body;
-
-//   if ((!id && id !== 0) || !message) {
-//     return res.json({
-//       success: false,
-//       error: "INVALID INPUTS"
-//     });
-//   }
-//   data.message = message;
-//   data.id = id;
-//   data.save(err => {
-//     if (err) return res.json({ success: false, error: err });
-//     return res.json({ success: true });
-//   });
+/**
+ * @description: To get data for products on list page
+ */
+app.get('/api/getListData/:tabId', (req, res, next) => {
+    if (req.params && req.params.tabId) {
+        const tabId = req.params.tabId;
+        let listData;
+        switch(tabId) {
+            case "1":
+                listData = fictionBookData;
+                break;
+            case "2":
+                listData = biographyBooksData;
+                break;
+            case "3":
+                listData = sciFiBooksData;
+                break;
+            default:
+                listData = fictionBookData;
+                break;
+        }
+        return res.json({ responseData: listData });
+    }
+    else
+    {
+        return res.json({ responseData: null });
+    }
 });
-
-// append /api for our http requests
-app.use("/api", router);
-
 // launch our backend into a port
 app.listen(API_PORT, () => console.log(`LISTENING ON PORT ${API_PORT}`));

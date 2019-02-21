@@ -1,0 +1,23 @@
+.btn {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #323232;
+    cursor: pointer;
+    font-size: 11px;
+    height: 24px;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn.cartbtn {
+    background-color: #00A651;
+    height: 40px;
+    width: 76px;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 11px;
+}

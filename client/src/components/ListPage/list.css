@@ -1,0 +1,59 @@
+.listCont{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.itemBox {
+    border: 1px solid #ccc;
+    display: flex;
+    flex: 0 1 900px;
+    margin: 10px;
+}
+
+.itemImage{
+    width: 128px;
+    padding: 2px;
+}
+
+.itemImage img {
+    width: 100%;
+}
+
+.itemDescription {
+    display: flex;
+    flex-direction: column;
+    flex: 0 1 500px;
+    margin: 5px;
+    /* border: 1px solid red; */
+    padding: 10px;
+}
+
+.itemTitle {
+    font-family: 'Varela Round', sans-serif;
+
+    color: #121f44;
+}
+
+.itemDesc {
+    font-family: 'Varela Round', sans-serif;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.itemPrice {
+    margin-top: 20px;
+    color: #ff0000;
+}
+
+.itemAction {
+    display: flex;
+    margin-top: 10px;
+}
+
+.addToCartBtn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}

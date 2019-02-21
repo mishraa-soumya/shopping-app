@@ -1,0 +1,15 @@
+{
+  "name": "reimagineJSPTester",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://git.catchpoint.net/smishra/reimagineJSPTester.git",
+  "author": "soumyaCatchpoint <smishra@catchpoint.com>",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd server && nodemon server.js\" \"cd client && npm start\"",
+    "debug": "concurrently \"cd server && node --inspect server.js\" \"cd client && npm start\""
+  }
+}
