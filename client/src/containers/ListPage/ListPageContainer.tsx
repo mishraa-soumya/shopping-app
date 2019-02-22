@@ -1,7 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 import * as API from '../../common/fetchData';
-import { TabType, TabItem, ListObject, TabID } from '../../common/common';
+import { TabType, TabItem, ListObject } from '../../common/common';
 const Navbar = React.lazy(() => import('../../components/Layout/Navbar'));
 const ListPage = React.lazy(() => import('../../components/ListPage/ListPage'));
 const styles = require('./ListPage.css') as {[key:string]: string};
@@ -11,8 +11,12 @@ export interface ListPageContainerState {
     listData: ListObject[];
     currentTab: TabItem | null;
 }
-class ListPageContainer extends React.Component<RouteComponentProps<{}>, ListPageContainerState> {
-    constructor(props: RouteComponentProps<{}>) {
+
+export interface ListPageContainerProps extends RouteComponentProps<{}> {
+    addToCartHandler: () => void;
+}
+class ListPageContainer extends React.Component<ListPageContainerProps, ListPageContainerState> {
+    constructor(props: ListPageContainerProps) {
         super(props);
         this.state = {
             tabData: [],
@@ -44,7 +48,6 @@ class ListPageContainer extends React.Component<RouteComponentProps<{}>, ListPag
 
     private onTabClick = async (tab: TabItem) => {
         const currentTabId: number = tab.id as number;
-        console.log(`currentTabId ${typeof currentTabId}`);
         const listData = await this.getListData(currentTabId);
         this.setState({
             currentTab: tab,
@@ -72,6 +75,8 @@ class ListPageContainer extends React.Component<RouteComponentProps<{}>, ListPag
             <React.Suspense fallback={<div>Loading...</div>}>
                 <ListPage
                     listData={this.state.listData}
+                    currentTab={this.state.currentTab}
+                    onCartBtnClick={this.props.addToCartHandler}
                 />
             </React.Suspense>
         );

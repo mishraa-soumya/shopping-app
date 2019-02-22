@@ -1,0 +1,54 @@
+.detailWrapper {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+.detailLeftSection {
+    display: flex;
+}
+
+.detailLargeImg {
+    width: 420px;
+    height: 584px;
+}
+
+.detailLargeImg img {
+    width: 100%;
+}
+
+.detailRightSection {
+    display: flex;
+    flex-direction: column;
+}
+
+.detailRightSection .descriptionBox {
+    display: flex;
+    flex-direction: column;
+}
+
+.descriptionBox {
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
+    margin-left: 15px;
+}
+
+.descriptionBox > div {
+    margin: 15px 5px;
+    font-family: 'Verdana', sans-serif;
+}
+
+.itemPrice {
+    color: #f54040;
+}
+
+.itemTitle {
+    color: dodgerblue;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.itemDetail {
+    font-size: 12px;
+}

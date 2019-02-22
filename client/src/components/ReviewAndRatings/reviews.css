@@ -1,0 +1,60 @@
+.reviewsWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    margin-left: 15px;
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+    padding: 15px;
+    font-family: 'Verdana', sans-serif;
+}
+
+.reviewHeading {
+    font-weight: bold;
+    font-size: 24px;
+    font-family: 'Verdana', sans-serif;
+    color: dodgerblue;
+}
+
+.reviewData {
+    margin-top: 20px;
+}
+
+.reviewItems {
+    border-top: 1px solid #f0f0f0;
+    padding: 24px;
+}
+
+.ratingPill {
+    line-height: normal;
+    display: inline-block;
+    color: #fff;
+    padding: 2px 4px 2px 6px;
+    border-radius: 3px;
+    font-weight: 500;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+.ratingGreenPill {
+    background-color: #388e3c;
+}
+
+.ratingRedPill {
+    background-color: #f54040;
+}
+
+.reviewDesc {
+    line-height: 1.4;
+    font-size: 14px;
+    color: #212121;
+    margin: 12px 0;
+}
+
+.reviewDetails {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #878787
+}

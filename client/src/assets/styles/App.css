@@ -6,7 +6,6 @@ body {
 }
 
 .app-wrapper {
-    border: 1px solid #000;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -59,4 +58,21 @@ body {
   .header-right {
       float: none;
   }
+}
+
+.cartIcon {
+  position: relative;
+}
+.cartIcon img {
+  width: 48px;
+}
+
+.cartIcon > span {
+  position: absolute;
+  background-color: red;
+  color: #fff;
+  left: 28px;
+  top: -20px;
+  border-radius: 50%;
+  padding: 5px;
 }

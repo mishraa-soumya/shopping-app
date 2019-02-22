@@ -14,14 +14,14 @@ export function getStyles(styles: StyleSheet, cssClasses: string[]): string {
     return classNames;
 }
 
-export type TabID = number | string;
+export type ID = number | string;
 
 export interface TabItem {
-    id: TabID;
+    id: ID;
     value: string;
 }
 export interface TabType {
-    id: TabID;
+    id: ID;
     text: string;
 }
 
@@ -35,4 +35,17 @@ export interface ListObject {
     shortDescription: string;
     quantity: number;
     price: string;
+}
+
+export interface ReviewRatingsObject {
+    key: string;
+    id: ID;
+    ratingStar: number;
+    review: ReviewObject;
+}
+
+export interface ReviewObject {
+    reviewerName: string;
+    description: string;
+    date: string;
 }
