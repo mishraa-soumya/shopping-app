@@ -4,6 +4,8 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 import ListPageContainer from './ListPage/ListPageContainer';
 import { default as ProductDetailPage } from './ProductDetailPage/ProductDetailPageContainer';
 import '../assets/styles/App.css';
+import AboutUs from './AboutUS/aboutus';
+import ContactUs from './ContactUs/contactus';
 
 
 export interface AppContainerState {
@@ -34,6 +36,8 @@ class AppContainer extends Component<{},AppContainerState> {
                 <Switch>
                     <Route path="/" exact render={(props) => <ListPageContainer {...props} addToCartHandler={this.addToCartHandler} />} />
                     <Route path="/detail/:tabId/:productId" exact component={ProductDetailPage} />
+                    <Route path="/about" exact component={AboutUs} />
+                    <Route path="/contact" exact component={ContactUs} />
                     <Redirect to="/"/>
                 </Switch>
             </Suspense>
